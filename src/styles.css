@@ -1,8 +1,115 @@
 /* add css styles here (optional) */
+.container{
+  position: relative;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  transition: all .5s, background-color 0s;
+  word-break: break-all;
+  white-space: normal;
+  z-index: 30000;
+  max-width: 280px;
+}
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+[class*="exit"]{
+  opacity: 0;
+  transform: translateX(120%);
+}
+[class*="enter"]{
+  opacity: 0;
+  transform: translateX(120%);
+}
+[class*="enter-active"], [class*="enter-done"]{
+  opacity: 1;
+  transform: translateX(0);
+  transition: all .5s, background-color 0s;
+}
+[class*="exit"]{
+  opacity: 1;
+  transform: translateX(0);
+  transition: all .5s, background-color 0s;
+}
+[class*="exit-active"]{
+  opacity: 0;
+  transform: translateX(120%);
+}
+.wrapper {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+}
+
+
+.close_btn {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: block;
+  transition: all .2s, background-color 0s;
+}
+
+.close_btn:hover{
+  transform: rotate(-20deg);
+}
+.close_btn:focus,
+.close_btn:active {
+  outline: none;
+  box-shadow: none;
+}
+.info {
+  background-color: #7d5fff;
+  color: #7efff5;
+}
+
+.error{
+  background-color: #ff3838;
+  color: #fff;
+}
+.success{
+  background-color: #ffaf40;
+  /*background-color: #3ae374;*/
+  color: #fff
+}
+.warn {
+  background-color: #17c0eb;
+  color: #fff;
+}
+
+.notification_addon{
+  font-size: .8rem;
+}
+p{
+  margin-bottom: 3px
+}
+.progress{
+  position: absolute;
+  height: 5px;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  width: 0;
+  background-color: #3d3d3d;
+  border-radius: 5px 0 0 0;
+  animation:  progress 5s linear;
+}
+@keyframes progress {
+  from{
+    width: 100%;
+  }
+  to{
+    width: 0;
+  }
 }
