@@ -101,15 +101,15 @@ Duration of showing notification depends on **duration** property.
 #### Example
 ```jsx 
  <Notify customContent={true}>
-          {
-            ({message, type}) => (
-                <div className={`my-notify-${type}`}>
-                    <p>
-                        {message}
-                    </p>
-                </div>
-            )
-          }
+      {
+        ({message, type}) => (
+            <div className={`my-notify-${type}`}>
+                <p>
+                    {message}
+                </p>
+            </div>
+        )
+      }
  </Notify>
 ```
 
