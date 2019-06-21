@@ -1,9 +1,10 @@
 {
   "name": "notifier-example",
-  "homepage": ".",
+  "homepage": "https://dymarchyk.github.io/notify",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -15,6 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
   }
 }

@@ -13,7 +13,7 @@ or
 yarn add r-notify
 ```
 ## Usage
-
+You can watch example [here](https://dymarchyk.github.io/notify).
 ```jsx
 import React, { Component } from 'react'
 
