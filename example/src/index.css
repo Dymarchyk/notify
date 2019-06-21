@@ -18,6 +18,12 @@ button{
   border-radius: 4px;
   background-color: transparent;
   margin-bottom: 10px;
+  transition: .1s;
+}
+button:hover{
+  color: #fff;
+  background-color: #546de5;
+  box-shadow: 0 0 10px rgba(0, 20 , 0 , .2);
 }
 .d-flex{
   display: flex;

@@ -23,13 +23,39 @@ export default class Notify extends Component {
         ...rest
       })
     }))
+    
     setTimeout(() => {
       _instance.close(id)
-    }, 5000)
+    }, _instance.props.duration)
+    return id
   }
   
   static clearAll() {
     _instance.setState({ messages: [] })
+  }
+  
+  /**
+   * Close notification by id
+   * @param id {number}
+   */
+  static close(id) {
+    _instance.setState(prev => ({
+      messages: prev.messages.filter(el => el.id !== id)
+    }))
+  }
+  
+  /**
+   * Update notification message
+   * @param params {Object}
+   * @param id {number}
+   */
+  static update({ id, ...params }) {
+    _instance.setState(prev => ({
+      messages: prev.messages.map(row => {
+        if (row.id === id) return { ...row, ...params }
+        return row
+      })
+    }))
   }
   
   constructor(props) {
@@ -41,7 +67,8 @@ export default class Notify extends Component {
     customTypes: PropTypes.arrayOf(PropTypes.array),
     customContent: PropTypes.bool,
     className: PropTypes.string,
-    children: PropTypes.func
+    children: PropTypes.func,
+    duration: PropTypes.number
   }
   
   state = {
@@ -49,6 +76,7 @@ export default class Notify extends Component {
   }
   /**
    * Close notification and clear message
+   * @param id {number}
    */
   close = (id) => {
     this.setState(prev => ({
@@ -59,7 +87,10 @@ export default class Notify extends Component {
   render() {
     
     const { messages } = this.state
-    const { customTypes, customContent, children } = this.props
+    const {
+      customTypes, customContent, children,
+      duration
+    } = this.props
     const {
       container,
       wrapper,
@@ -68,10 +99,10 @@ export default class Notify extends Component {
     } = styles
     
     const typesMap = new Map([
-      ['info', info, 'notify--info'],
-      ['error', error, 'notify--error'],
-      ['success', success, 'notify--success'],
-      ['warn', warn, 'notify--warn'],
+      ['info', info],
+      ['error', error],
+      ['success', success],
+      ['warn', warn],
       ...customTypes
     ])
     return (
@@ -82,14 +113,14 @@ export default class Notify extends Component {
             <CSSTransition
               key={row.id}
               timeout={500}
-              classNames={classNames(container, typesMap.get(row.type), container)}
+              className={classNames(container, typesMap.get(row.type))}
+              classNames={classNames(container)}
             >
               <div className='notify-content'>
                 <button
                   onClick={this.close.bind(this, row.id)}
                   title='close'
                   className={styles.close_btn}>&times;</button>
-                
                 {this.props.children && this.props.children(row)}
                 
                 <p className='notify-message'>
@@ -104,7 +135,7 @@ export default class Notify extends Component {
                     </p>
                   </div>
                 }
-                <div className={progress + ' notify-progress'}/>
+                <div style={{ animationDuration: duration }} className={progress + ' notify-progress'}/>
               </div>
             </CSSTransition>
           ))
@@ -127,5 +158,6 @@ export default class Notify extends Component {
 }
 Notify.defaultProps = {
   customTypes: [],
-  customContent: false
+  customContent: false,
+  duration: 5000
 }
