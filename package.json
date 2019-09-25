@@ -1,6 +1,6 @@
 {
   "name": "r-notify",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "react notification component",
   "author": "Dymarchyk",
   "license": "MIT",
@@ -15,7 +15,6 @@
     "popup",
     "alerts"
   ],
-  "types": "dist/module.d.ts",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
