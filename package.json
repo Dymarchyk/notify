@@ -10,6 +10,7 @@
   "jsnext:main": "dist/index.es.js",
   "homepage": "https://github.com/Dymarchyk/notify",
   "keywords": ["react", "notification", "popup", "alerts"],
+  "types": "module.d.ts",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
