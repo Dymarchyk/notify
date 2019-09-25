@@ -23,7 +23,7 @@ export default class App extends Component {
       info: {
         type: 'info',
         message: 'Very important text goes here.',
-        postscript: 'And here is not so important things.'
+        postscript: 'And here is not so important things.',
       },
       error: {
         type: 'error',

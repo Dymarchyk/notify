@@ -6,9 +6,8 @@ import styles from './styles.css'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import PropTypes from 'prop-types'
 
-let _instance = null
-
 export default class Notify extends Component {
+  static instance
   /**
    * @param type {string}
    * @param message {string}
@@ -16,22 +15,21 @@ export default class Notify extends Component {
    */
   static show({ type = 'info', message = '', ...rest }) {
     let id = Date.now()
-    _instance.setState((prev) => ({
+    Notify.instance.setState((prev) => ({
       messages: prev.messages.concat({
         id,
         type, message,
         ...rest
       })
     }))
-    
     setTimeout(() => {
-      _instance.close(id)
-    }, _instance.props.duration)
+      Notify.instance.close(id)
+    }, Notify.instance.props.duration)
     return id
   }
   
   static clearAll() {
-    _instance.setState({ messages: [] })
+    Notify.instance.setState({ messages: [] })
   }
   
   /**
@@ -39,7 +37,7 @@ export default class Notify extends Component {
    * @param id {number}
    */
   static close(id) {
-    _instance.setState(prev => ({
+    Notify.instance.setState(prev => ({
       messages: prev.messages.filter(el => el.id !== id)
     }))
   }
@@ -50,7 +48,7 @@ export default class Notify extends Component {
    * @param id {number}
    */
   static update({ id, ...params }) {
-    _instance.setState(prev => ({
+    Notify.instance.setState(prev => ({
       messages: prev.messages.map(row => {
         if (row.id === id) return { ...row, ...params }
         return row
@@ -60,7 +58,8 @@ export default class Notify extends Component {
   
   constructor(props) {
     super(props)
-    _instance = this
+    if (Notify.instance) return Notify.instance
+    Notify.instance = this
   }
   
   static propTypes = {
@@ -121,7 +120,7 @@ export default class Notify extends Component {
                   onClick={this.close.bind(this, row.id)}
                   title='close'
                   className={styles.close_btn}>&times;</button>
-                {this.props.children && this.props.children(row)}
+                {children && children(row)}
                 
                 <p className='notify-message'>
                   {row.message}
@@ -135,7 +134,7 @@ export default class Notify extends Component {
                     </p>
                   </div>
                 }
-                <div style={{ animationDuration: duration }} className={progress + ' notify-progress'}/>
+                <div style={{ animationDuration: duration + 'ms' }} className={progress + ' notify-progress'}/>
               </div>
             </CSSTransition>
           ))
