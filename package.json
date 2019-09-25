@@ -1,6 +1,6 @@
 {
   "name": "r-notify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react notification component",
   "author": "Dymarchyk",
   "license": "MIT",
@@ -9,7 +9,12 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "homepage": "https://github.com/Dymarchyk/notify",
-  "keywords": ["react", "notification", "popup", "alerts"],
+  "keywords": [
+    "react",
+    "notification",
+    "popup",
+    "alerts"
+  ],
   "types": "dist/module.d.ts",
   "engines": {
     "node": ">=8",
